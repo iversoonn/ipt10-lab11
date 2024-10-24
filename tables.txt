@@ -1,0 +1,31 @@
+CREATE TABLE Students (    id INT PRIMARY KEY AUTO_INCREMENT,    student_code VARCHAR(20) NOT NULL UNIQUE,    first_name VARCHAR(50) NOT NULL,    last_name VARCHAR(50) NOT NULL,    email VARCHAR(100) NOT NULL UNIQUE,    date_of_birth DATE NOT NULL,    sex ENUM('Male', 'Female') NOT NULL);
+
+ CREATE TABLE Courses (    id INT PRIMARY KEY AUTO_INCREMENT,    course_name VARCHAR(100) NOT NULL,    course_code VARCHAR(10) NOT NULL UNIQUE,    description TEXT,    credits INT NOT NULL);
+
+ CREATE TABLE Course_Enrolments (    id INT PRIMARY KEY AUTO_INCREMENT,    student_code VARCHAR(20) NOT NULL,    course_code VARCHAR(10) NOT NULL,    enrolment_date DATE NOT NULL,    grade VARCHAR(2),    FOREIGN KEY (student_code) REFERENCES Students(student_code),    FOREIGN KEY (course_code) REFERENCES Courses(course_code));
+
+MariaDB [ipt10lab11]> INSERT INTO Students (student_code, first_name, last_name, email, date_of_birth, sex)
+    VALUES    
+     ('S001', 'Alice', 'Johnson', 'alice.johnson@example.com', '2000-05-15', 'Female'),
+     ('S002', 'Bob', 'Smith', 'bob.smith@example.com', '1999-08-22', 'Male'),
+     ('S003', 'Charlie', 'Brown', 'charlie.brown@example.com', '2001-12-30', 'Male'),
+     ('S004', 'Diana', 'Prince', 'diana.prince@example.com', '2000-11-10', 'Female'),
+     ('S005', 'Edward', 'Elric', 'edward.elric@example.com', '1998-07-12', 'Male');
+Query OK, 5 rows affected (0.002 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+MariaDB [ipt10lab11]> INSERT INTO Courses (course_name, course_code, description, credits)
+VALUES
+('Introduction to Computer Science', 'CS101', 'An introduction to the fundamentals of computer science.', 3),
+('Data Structures', 'CS102', 'A study of data structures and their applications.', 4),
+('Database Management Systems', 'CS103', 'An overview of database design and management.', 3);
+Query OK, 3 rows affected (0.003 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+MariaDB [ipt10lab11]> INSERT INTO Course_Enrolments (student_code, course_code, enrolment_date, grade)
+VALUES
+('S001', 'CS101', '2023-09-01', 'A'),
+('S002', 'CS101', '2023-09-01', 'B'),
+('S003', 'CS102', '2023-09-01', 'A'),
+('S004', 'CS102', '2023-09-01', NULL),
+('S005', 'CS103', '2023-09-01', 'C');

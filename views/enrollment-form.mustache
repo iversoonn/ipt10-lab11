@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enrollment Form</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+
+    <div class="container mt-5">
+        <h1 class="mb-4">Enrollment Form</h1>
+
+        <form action="/enroll" method="post">
+            <div class="mb-3">
+                <label for="course_code" class="form-label">Course</label>
+                <select name="course_code" id="course_code" class="form-select" required>
+                    <option value="" disabled selected>Select a course</option>
+                    {{# courses }}
+                    <option value="{{ course_code }}">{{ course_name }}</option>
+                    {{/ courses }}
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="student_code" class="form-label">Students</label>
+                <select name="student_code" id="student_code" class="form-select" required>
+                    <option value="" disabled selected>Select a student</option>
+                    {{# students }}
+                    <option value="{{ student_code }}">{{ student_name }}</option>
+                    {{/ students }}
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="enrollment_date" class="form-label">Enrollment Date</label>
+                <input type="date" name="enrollment_date" id="enrollment_date" class="form-control" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Enroll Student</button>
+        </form>
+
+        <hr />
+        <nav>
+            <ul class="pagination justify-content-center">
+                <li class="page-item"><a class="page-link" href="/courses">List of courses</a></li>
+                <li class="page-item"><a class="page-link" href="/students">List of students</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
